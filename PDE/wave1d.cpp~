@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cmath>
+//#include <vector>
+
+
+int main(void){
+  const double rho = 0.01;
+  const double tension = 40;
+  const double max = 100;
+
+  double x [101][3];
+  const double c = std::sqrt(tension/rho);
+  double c1 = c ;
+  double ratio = c*c/(c1*c1);
+
+  for(int ii = 0; ii < 101; ii++) x[ii][0] = 0.001*std::sin(2*M_PI*ii);
+  
+  for(int ii = 0; ii < 101; ii++) std::cout << x[ii][0] << std::endl;
+  std::cout << std::endl;
+  for(int ii = 1; ii < 100; ii++){
+    x[ii][1]= x[ii][0] + 0.5*ratio*(x[ii+1][0]+x[ii-1][0]-2*x[ii][0]);
+  }
+  for(int ii = 0; ii < 101; ii++) std::cout << x[ii][1] << std::endl;
+  std::cout << std::endl;
+  for(int jj = 0; jj < max; jj++){
+    for(int ii = 1; ii < 100; ii++){
+      x[ii][2]= 2*x[ii][1]-x[ii][0] + ratio*(x[ii+1][1]+x[ii-1][1]-2*x[ii][1]);    }
+    
+    for(int kk = 0; kk < 101; kk++){
+      x[kk][0] = x[kk][1];
+      x[kk][1] = x[kk][2];
+    }
+    for(int ii = 0; ii < 101; ii++) std::cout << x[ii][2] << std::endl;
+    std::cout << std::endl;
+  }
+  return 0;
+}
