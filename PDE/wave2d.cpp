@@ -4,7 +4,7 @@
 
 const double RHO = 0.01;
 const double TENSION = 40;
-const double MAX = 1000;
+const double MAX = 10000;
 const double C = std::sqrt(TENSION/RHO);
 const double C1 = 3*C ;
 const double RATIO = C*C/(C1*C1);
@@ -64,9 +64,9 @@ void advance(std::vector<double> &x){
 }
      
 void print_gnuplot(std::vector<double> &x ,int &n){
-  std::cout << "plot [][-0.001:0.001]  '-' w l" << std::endl;
+  std::cout << "splot   '-'  " << std::endl;
   for(int ii = 0; ii<101 ; ii++){
-    std::cout <<ii*0.01 <<" "<< x[n*101+ii] << std::endl;
+    std::cout <<ii*0.01 <<" " << ii*0.01<<" "<< x[n*101+ii] << std::endl;
   }
   std::cout << "e" << std::endl;
 }
